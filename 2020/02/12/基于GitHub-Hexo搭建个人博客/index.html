@@ -201,19 +201,13 @@
 
         <div class="post-content">
             <h1 id="基于GitHub-Hexo搭建个人博客"><a href="#基于GitHub-Hexo搭建个人博客" class="headerlink" title="基于GitHub+Hexo搭建个人博客"></a>基于GitHub+Hexo搭建个人博客</h1><p>这是我的首次尝试，基于GitHub+Hexo 搭建个人博客网站。Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Heroku上。</p>
-<h2 id="搭建步骤："><a href="#搭建步骤：" class="headerlink" title="搭建步骤："></a><strong>搭建步骤：</strong></h2><ul>
-<li><p><del>获得个人网站域名</del></p>
-<p>申请域名的地方有很多，这里推荐：<a href="https://www.aliyun.com/" target="_blank" rel="noopener">阿里云-为了无法计算的价值</a> 申请入口：<a href="https://wanwang.aliyun.com/domain/" target="_blank" rel="noopener">域名注册</a></p>
-</li>
-<li><p>GitHub创建个人仓库</p>
-<p>点击GitHub中的New repository创建新仓库，仓库名应该为：<strong>用户名</strong>.github.io</p>
-</li>
-<li><p>安装Hexo</p>
-<p>Hexo 的安装和使用都非常便捷。但是，你的计算机环境中必须有这两个东西：</p>
+<h2 id="搭建步骤："><a href="#搭建步骤：" class="headerlink" title="搭建步骤："></a><strong>搭建步骤：</strong></h2><h5 id="获得个人网站域名"><a href="#获得个人网站域名" class="headerlink" title="获得个人网站域名"></a><del>获得个人网站域名</del></h5><p>  这里推荐：<a href="https://www.aliyun.com/" target="_blank" rel="noopener">阿里云-为了无法计算的价值</a> 申请入口：<a href="https://wanwang.aliyun.com/domain/" target="_blank" rel="noopener">域名注册</a></p>
+<h5 id="GitHub创建个人仓库"><a href="#GitHub创建个人仓库" class="headerlink" title="GitHub创建个人仓库"></a>GitHub创建个人仓库</h5><p>  点击GitHub中的New repository创建新仓库，仓库名应该为：<strong>用户名</strong>.github.io</p>
+<h5 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h5><p>  Hexo 的安装和使用都非常便捷。但是，你的计算机环境中必须有这两个东西：</p>
 <ul>
-<li><a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">Node.js</a>。从官网下载<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">Node.js</a> ，注意安装Node.js会包含环境变量及npm的安装，安装后，在命令行中输入 node -v 及npm -v检测Node.js是否安装成功</li>
-<li><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a>。参考<a href="www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">廖雪峰的Git教程</a>，从官网下载<a href="https://git-scm.com/download/win" target="_blank" rel="noopener">Git</a>。安装成功后，将你的Git与GitHub帐号绑定</li>
-</ul>
+<li><p><a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">Node.js</a>。从官网下载<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">Node.js</a> ，注意安装Node.js会包含环境变量及npm的安装，安装后，在命令行中输入 node -v 及npm -v检测Node.js是否安装成功</p>
+</li>
+<li><p><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a>。参考<a href="www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">廖雪峰的Git教程</a>，从官网下载<a href="https://git-scm.com/download/win" target="_blank" rel="noopener">Git</a>。安装成功后，将你的Git与GitHub帐号绑定</p>
 <p>其中 Node.js 是 Hexo 的构建引擎，Git 是版本控制工具：</p>
 <p>如果你的环境没有问题的话，那么我们就可以安装 Hexo 了：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
@@ -227,40 +221,35 @@
 <p>那么恭喜，你的博客已经构建成功了！你可以到输出结果指定的地址去访问你的博客了。</p>
 </li>
 </ul>
-<ul>
-<li><p>推送网站</p>
-<p>打开blog根目录的站点配置文件_config.yml，翻到最后修改为：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:Zera7ul/Zera7ul.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message:</span><br></pre></td></tr></table></figure>
+<h5 id="推送网站"><a href="#推送网站" class="headerlink" title="推送网站"></a>推送网站</h5><p>  打开blog根目录的站点配置文件_config.yml，翻到最后修改为：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:Zera7ul/Zera7ul.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line">  message:</span><br></pre></td></tr></table></figure>
 
-<p>安装Git部署插件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>  安装Git部署插件：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 
-<p>Git部署</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean </span><br><span class="line">$ hexo g </span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
+<p>  Git部署</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean </span><br><span class="line">$ hexo g </span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
 
-<p>部署成功后即可访问<a href="https://zera7ul.github.io/" target="_blank" rel="noopener">https://zera7ul.github.io/</a></p>
-</li>
-<li><p><del>绑定域名</del></p>
-<p><em>施工中</em></p>
-</li>
-<li><p>更换主题</p>
-<p>如果你不喜欢Hexo默认的主题，可以更换不同的主题：<a href="https://hexo.io/themes/" target="_blank" rel="noopener">Themes</a></p>
-</li>
-<li><p>发布文章</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &lt;title&gt;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>其他<br><strong>常用Hexo 命令：</strong></p>
+<p>  部署成功后即可访问<a href="https://zera7ul.github.io/" target="_blank" rel="noopener">https://zera7ul.github.io/</a></p>
+<h5 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a><del>绑定域名</del></h5><p>  <em>施工中</em></p>
+<h5 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h5><p>  如果你不喜欢Hexo默认的主题，可以更换不同的主题：<a href="https://hexo.io/themes/" target="_blank" rel="noopener">Themes</a></p>
+<h5 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h5>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &lt;title&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h5><ul>
+<li><p>常用Hexo 命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo -g <span class="comment">#安装Hexo</span></span><br><span class="line">$ npm update hexo -g <span class="comment">#升级</span></span><br><span class="line">$ hexo init <span class="comment">#初始化博客</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server <span class="comment">#Hexo会监视文件变动并自动更新，无须重启服务器</span></span><br><span class="line">$ hexo server -s <span class="comment">#静态模式</span></span><br><span class="line">$ hexo server -p 5000 <span class="comment">#更改端口</span></span><br><span class="line">$ hexo server -i 192.168.1.1 <span class="comment">#自定义 IP</span></span><br><span class="line">$ hexo clean <span class="comment">#清除缓存，若是网页正常情况下可以忽略这条命令</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>命令简写：</strong></p>
+</li>
+<li><p>命令简写：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo n &lt;title&gt; == $ hexo new &lt;title&gt; <span class="comment">#新建文章</span></span><br><span class="line">$ hexo g == $ hexo generate <span class="comment">#生成博客</span></span><br><span class="line">$ hexo s == $ hexo server <span class="comment">#启动本地服务预览</span></span><br><span class="line">$ hexo d == $ hexo deploy <span class="comment">#部署</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>个性化设置</strong></p>
+</li>
+<li><p>个性化设置</p>
 <p><em>施工中</em></p>
-<p><strong>使用图床：</strong><br>当博文中有图片时，若是少量图片，可以直接把图片存放在source文件夹中，但这显然不合理的，因为图片会占据大量的存储的空间，加载的时候相对缓慢 ，这时考虑把博文里的图片上传到某一网站，然后获得外部链接，使用Markdown语法，<strong><img src="E:/%E6%96%87%E4%BB%B6/%E4%B8%AA%E4%BA%BA/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/Git%E7%AC%94%E8%AE%B0/%E5%A4%96%E9%83%A8%E9%93%BE%E6%8E%A5" alt="图片信息"></strong> 完成图片的插入，这种网站就被称为图床。常见的简易的图床网站有：<a href="https://www.tietuku.com/" target="_blank" rel="noopener">贴图库</a> 、新浪微博和 <a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛云</a> ，使用方法可以参看其他文章。</p>
-<p><strong>Markdown使用</strong></p>
+</li>
+<li><p>使用图床：<br>当博文中有图片时，若是少量图片，可以直接把图片存放在source文件夹中，但这显然不合理的，因为图片会占据大量的存储的空间，加载的时候相对缓慢 ，这时考虑把博文里的图片上传到某一网站，然后获得外部链接，使用Markdown语法，<strong><img src="E:/%E6%96%87%E4%BB%B6/%E4%B8%AA%E4%BA%BA/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/Git%E7%AC%94%E8%AE%B0/%E5%A4%96%E9%83%A8%E9%93%BE%E6%8E%A5" alt="图片信息"></strong> 完成图片的插入，这种网站就被称为图床。常见的简易的图床网站有：<a href="https://www.tietuku.com/" target="_blank" rel="noopener">贴图库</a> 、新浪微博和 <a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛云</a> ，使用方法可以参看其他文章。</p>
+</li>
+<li><p>Markdown使用</p>
 <p>参考 <a href="http://www.wiz.cn/feature-markdown.html" target="_blank" rel="noopener">Markdown新手指南</a></p>
 </li>
 </ul>
