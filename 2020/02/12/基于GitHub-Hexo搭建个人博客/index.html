@@ -235,25 +235,22 @@
 <h5 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h5><p>  如果你不喜欢Hexo默认的主题，可以更换不同的主题：<a href="https://hexo.io/themes/" target="_blank" rel="noopener">Themes</a></p>
 <h5 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h5>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &lt;title&gt;</span><br></pre></td></tr></table></figure>
 
-<h5 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h5><ul>
-<li><p>常用Hexo 命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo -g <span class="comment">#安装Hexo</span></span><br><span class="line">$ npm update hexo -g <span class="comment">#升级</span></span><br><span class="line">$ hexo init <span class="comment">#初始化博客</span></span><br></pre></td></tr></table></figure>
+<h5 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h5><h6 id="常用Hexo-命令："><a href="#常用Hexo-命令：" class="headerlink" title="常用Hexo 命令："></a>常用Hexo 命令：</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo -g <span class="comment">#安装Hexo</span></span><br><span class="line">$ npm update hexo -g <span class="comment">#升级</span></span><br><span class="line">$ hexo init <span class="comment">#初始化博客</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server <span class="comment">#Hexo会监视文件变动并自动更新，无须重启服务器</span></span><br><span class="line">$ hexo server -s <span class="comment">#静态模式</span></span><br><span class="line">$ hexo server -p 5000 <span class="comment">#更改端口</span></span><br><span class="line">$ hexo server -i 192.168.1.1 <span class="comment">#自定义 IP</span></span><br><span class="line">$ hexo clean <span class="comment">#清除缓存，若是网页正常情况下可以忽略这条命令</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>命令简写：</p>
+
+<p>命令简写：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo n &lt;title&gt; == $ hexo new &lt;title&gt; <span class="comment">#新建文章</span></span><br><span class="line">$ hexo g == $ hexo generate <span class="comment">#生成博客</span></span><br><span class="line">$ hexo s == $ hexo server <span class="comment">#启动本地服务预览</span></span><br><span class="line">$ hexo d == $ hexo deploy <span class="comment">#部署</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="个性化设置"><a href="#个性化设置" class="headerlink" title="个性化设置"></a>个性化设置</h6><p><em>施工中</em></p>
+<h6 id="使用图床："><a href="#使用图床：" class="headerlink" title="使用图床："></a>使用图床：</h6><p>当博文中有图片时，若是少量图片，可以直接把图片存放在source文件夹中，但这显然不合理的，因为图片会占据大量的存储的空间，加载的时候相对缓慢 ，这时考虑把博文里的图片上传到某一网站，然后获得外部链接，使用Markdown语法，<strong><img src="E:/%E6%96%87%E4%BB%B6/%E4%B8%AA%E4%BA%BA/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/Git%E7%AC%94%E8%AE%B0/%E5%A4%96%E9%83%A8%E9%93%BE%E6%8E%A5" alt="图片信息"></strong> 完成图片的插入，这种网站就被称为图床。常见的简易的图床网站有：<a href="https://www.tietuku.com/" target="_blank" rel="noopener">贴图库</a> 、新浪微博和 <a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛云</a> ，使用方法可以参看其他文章。</p>
+<h6 id="Markdown使用"><a href="#Markdown使用" class="headerlink" title="Markdown使用"></a>Markdown使用</h6><ul>
+<li><p><a href="http://www.wiz.cn/feature-markdown.html" target="_blank" rel="noopener">Markdown新手指南</a></p>
 </li>
-<li><p>个性化设置</p>
-<p><em>施工中</em></p>
-</li>
-<li><p>使用图床：<br>当博文中有图片时，若是少量图片，可以直接把图片存放在source文件夹中，但这显然不合理的，因为图片会占据大量的存储的空间，加载的时候相对缓慢 ，这时考虑把博文里的图片上传到某一网站，然后获得外部链接，使用Markdown语法，<strong><img src="E:/%E6%96%87%E4%BB%B6/%E4%B8%AA%E4%BA%BA/%E8%87%AA%E6%88%91%E6%8F%90%E5%8D%87/Git%E7%AC%94%E8%AE%B0/%E5%A4%96%E9%83%A8%E9%93%BE%E6%8E%A5" alt="图片信息"></strong> 完成图片的插入，这种网站就被称为图床。常见的简易的图床网站有：<a href="https://www.tietuku.com/" target="_blank" rel="noopener">贴图库</a> 、新浪微博和 <a href="https://www.qiniu.com/" target="_blank" rel="noopener">七牛云</a> ，使用方法可以参看其他文章。</p>
-</li>
-<li><p>Markdown使用</p>
-<p>参考 <a href="http://www.wiz.cn/feature-markdown.html" target="_blank" rel="noopener">Markdown新手指南</a></p>
+<li><p><a href="http://xianbai.me/learn-md/" target="_blank" rel="noopener">Markdown入门参考</a></p>
 </li>
 </ul>
-<p>本文主要内容参考<a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26625249</a></p>
+<h6 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h6><p>本文主要内容参考<a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26625249</a></p>
 
         </div>
 
