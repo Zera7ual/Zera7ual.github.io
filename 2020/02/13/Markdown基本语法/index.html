@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Zera7ul">
+
+
+    <meta name="subtitle" content="Life is like a box of chocolates.">
+
+
+
+
+<title>Markdown基本语法 | Zera7ul&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Zera7ul&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Zera7ul&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Markdown基本语法</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Zera7ul</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">二月 13, 2020&nbsp;&nbsp;10:05:19</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Code/">Code</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Markdown基本语法"><a href="#Markdown基本语法" class="headerlink" title="Markdown基本语法"></a>Markdown基本语法</h1><h2 id="标题目录"><a href="#标题目录" class="headerlink" title="标题目录"></a>标题目录</h2><h3 id="分级标题"><a href="#分级标题" class="headerlink" title="分级标题"></a>分级标题</h3><p># 表示一级标题，## 表示二级标题，以此类推</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">###### 六级标题</span><br><span class="line">##### 五级标题</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="内容目录"><a href="#内容目录" class="headerlink" title="内容目录"></a>内容目录</h3><p>使用 [TOC] 显示目录结构</p>
+<p>[TOC]</p>
+<hr>
+<h2 id="文字"><a href="#文字" class="headerlink" title="文字"></a>文字</h2><h3 id="斜体和粗体"><a href="#斜体和粗体" class="headerlink" title="斜体和粗体"></a>斜体和粗体</h3><p>使用 * 和 ** 表示斜体和粗体</p>
+<p>示例：</p>
+<p>这是 <em>斜体</em>，这是 <strong>粗体</strong>。</p>
+<h3 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h3><p>使用 ~~ 表示删除线。</p>
+<p><del>这是一段错误的文本。</del></p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>使用 *，+，- 表示无序列表。</p>
+<p>示例：</p>
+<ul>
+<li>无序列表项 一</li>
+<li>无序列表项 二</li>
+<li>无序列表项 三</li>
+</ul>
+<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>使用数字和点表示有序列表。</p>
+<p>示例：</p>
+<ol>
+<li>有序列表项 一</li>
+<li>有序列表项 二</li>
+<li>有序列表项 三</li>
+</ol>
+<h3 id="待办事宜"><a href="#待办事宜" class="headerlink" title="待办事宜"></a>待办事宜</h3><p>使用带有 [ ] 或 [x] （未完成或已完成）项的列表语法撰写一个待办事宜列表，并且支持子列表嵌套以及混用Markdown语法，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- [ ] 笔记</span><br><span class="line">  - [ ] 编写</span><br><span class="line">    - [ ] 支持 MD</span><br><span class="line">    - [ ] 支持代码高亮</span><br><span class="line">  - [ ] 存放和阅读</span><br><span class="line">    - [ ] 支持手机端</span><br><span class="line">  - [ ] 整理</span><br><span class="line">    - [ ] 一本书完成后，整理至GB</span><br></pre></td></tr></table></figure>
+
+<p>对应显示如下待办事宜 Todo 列表：</p>
+<ul>
+<li><input disabled="" type="checkbox"> 笔记<ul>
+<li><input disabled="" type="checkbox"> 编写<ul>
+<li><input disabled="" type="checkbox"> 支持 MD</li>
+<li><input disabled="" type="checkbox"> 支持代码高亮</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> 存放和阅读<ul>
+<li><input disabled="" type="checkbox"> 支持手机端</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> 整理<ul>
+<li><input disabled="" type="checkbox"> 一本书完成后，整理至GB</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="引用链接"><a href="#引用链接" class="headerlink" title="引用链接"></a>引用链接</h2><h3 id="文字引用"><a href="#文字引用" class="headerlink" title="文字引用"></a>文字引用</h3><p>使用 &gt; 表示文字引用。</p>
+<p>示例：</p>
+<blockquote>
+<p>别放弃你的梦，继续睡吧。</p>
+</blockquote>
+<h3 id="外链接"><a href="#外链接" class="headerlink" title="外链接"></a>外链接</h3><p>使用 [描述](链接地址) 为文字增加外链接。</p>
+<p>示例：<a href="http://man.linuxde.net/" target="_blank" rel="noopener">Linux命令大全</a></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="行内代码块"><a href="#行内代码块" class="headerlink" title="行内代码块"></a>行内代码块</h3><p>使用 `代码` 表示行内代码块。</p>
+<p>示例：</p>
+<p>让我们聊聊 <code>Linux</code>。</p>
+<h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>使用 四个缩进空格 表示代码块。</p>
+<p>示例：</p>
+<pre><code>这是一个代码块，此行左侧有四个不可见的空格。</code></pre><h3 id="加强的代码块"><a href="#加强的代码块" class="headerlink" title="加强的代码块"></a>加强的代码块</h3><p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install vim-gnome</span><br></pre></td></tr></table></figure>
+
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><h3 id="表格支持"><a href="#表格支持" class="headerlink" title="表格支持"></a>表格支持</h3><p>示例：</p>
+<p>冒号表示对齐方向，可不用</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th align="right">价格</th>
+<th align="center">数量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>计算机</td>
+<td align="right">$1600</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td>手机</td>
+<td align="right">$12</td>
+<td align="center">12</td>
+</tr>
+<tr>
+<td>管线</td>
+<td align="right">$1</td>
+<td align="center">234</td>
+</tr>
+</tbody></table>
+<h3 id="Html-标签"><a href="#Html-标签" class="headerlink" title="Html 标签"></a>Html 标签</h3><p>可以在 Markdown 语法中嵌套 Html 标签，你可以用 Html 写一个纵跨两行的表格：</p>
+<pre><code>&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th rowspan=&quot;2&quot;&gt;值班人员&lt;/th&gt;
+        &lt;th&gt;星期一&lt;/th&gt;
+        &lt;th&gt;星期二&lt;/th&gt;
+        &lt;th&gt;星期三&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;李强&lt;/td&gt;
+        &lt;td&gt;张明&lt;/td&gt;
+        &lt;td&gt;王平&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre><table>
+    <tr>
+        <th rowspan="2">值班人员</th>
+        <th>星期一</th>
+        <th>星期二</th>
+        <th>星期三</th>
+    </tr>
+    <tr>
+        <td>李强</td>
+        <td>张明</td>
+        <td>王平</td>
+    </tr>
+</table>
+
+<h2 id="LaTeX-公式"><a href="#LaTeX-公式" class="headerlink" title="LaTeX 公式"></a>LaTeX 公式</h2><p>$ 表示行内公式： </p>
+<p>质能守恒方程可以用一个很简洁的方程式 $E=mc^2$ 来表达。</p>
+<p>$$ 表示整行公式：</p>
+<p>$$\sum_{i=1}^n a_i=0$$</p>
+<p>$$f(x_1,x_x,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2 $$</p>
+<p>$$\sum^{j-1}<em>{k=0}{\widehat{\gamma}</em>{kj} z_k}$$</p>
+<p>访问 <a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference" target="_blank" rel="noopener">MathJax</a> 参考更多使用方法。</p>
+<h2 id="插入图像"><a href="#插入图像" class="headerlink" title="插入图像"></a>插入图像</h2><p>使用 ![描述](图片链接地址) 插入图像。</p>
+<p>示例：</p>
+<p><img src="http://img1.gtimg.com/ent/pics/hv1/115/177/1922/125023300.png" alt="梁"></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Zera7ul</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://zera7ul.github.io/2020/02/13/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">https://zera7ul.github.io/2020/02/13/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Don't be  <strong>EVIL</strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Markdown/"># Markdown</a>
+                    
+                        <a href="/tags/Writing/"># Writing</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/02/12/Git%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/">Git基础操作</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Zera7ul | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
