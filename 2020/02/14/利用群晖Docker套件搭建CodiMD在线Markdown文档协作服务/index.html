@@ -210,29 +210,23 @@
 </ul>
 <p>于是决定利用群晖Docker套件搭建CodiMD在线Markdown文档协作服务。话不多说，我们开始。我使用的版本是DSM 6.2.2-24922 Update 4</p>
 <h4 id="1-安装Docker"><a href="#1-安装Docker" class="headerlink" title="1. 安装Docker"></a>1. 安装Docker</h4><p>点击套件中心-全部-滚动到中间位置就能找到Docker，当然也可以直接在搜索栏里搜索<code>Docker</code>。</p>
-<img src="http://q5onj2ilv.bkt.clouddn.com/static/images/static/images/test.jpg">
-
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200214100119590.png" alt="image-20200214100119590" style="zoom: 67%;" />
-
+<p><img src="http://q5onj2ilv.bkt.clouddn.com/blog/20200215/rgTu6wpMvfdP.png?imageslim" alt="搜索Docker"></p>
 <p>安装完成后，左上角主菜单和桌面会出现Docker</p>
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200214100306700.png" alt="image-20200214100306700" style="zoom: 67%;" />
-
+<p><img src="http://q5onj2ilv.bkt.clouddn.com/blog/20200215/7T5H1FINkVgW.png?imageslim" alt="Docker"></p>
 <h4 id="2-下载codimd镜像"><a href="#2-下载codimd镜像" class="headerlink" title="2. 下载codimd镜像"></a>2. 下载codimd镜像</h4><p>打开Docker-注册表，直接搜索<code>codimd</code></p>
 <p>双击<u><strong>linuxserver/codimd</strong></u>下载</p>
-<img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200214101927484.png" alt="image-20200214101927484" style="zoom:67%;" />
-
+<p><img src="http://q5onj2ilv.bkt.clouddn.com/blog/20200215/1GmXCf0mkojR.png?imageslim" alt="CodiMD镜像"></p>
 <h4 id="3-启动容器"><a href="#3-启动容器" class="headerlink" title="3. 启动容器"></a>3. 启动容器</h4><p>启动容器前，先在服务器新建<code>/docker/codimd/config</code>文件夹，映射为Docker容器卷，存放CodiMD的配置文件。</p>
-<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200214133226261.png" alt="image-20200214133226261"></p>
+<p><img src="http://q5onj2ilv.bkt.clouddn.com/blog/20200215/qo7MkCenBzjU.png?imageslim" alt="新建文件夹"></p>
 <p>在<code>映像</code>列表里选择刚刚下载好的镜像点击<code>启动</code></p>
 <p>填入容器名称后，点击<code>高级设置</code>，在<code>卷</code>中添加刚才创建的目录。</p>
-<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200214133259547.png" alt="image-20200214133259547"></p>
-<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200214133330050.png" alt="image-20200214133330050"></p>
-<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200214133357615.png" alt="image-20200214133357615"></p>
+<p><img src="http://q5onj2ilv.bkt.clouddn.com/blog/20200215/I6OtNsFiwFsi.png?imageslim" alt="创建容器"></p>
+<p><img src="http://q5onj2ilv.bkt.clouddn.com/blog/20200215/oLN6bc6iEeT2.png?imageslim" alt="卷映射"></p>
 <p>修改本地开放的端口</p>
-<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200214133446399.png" alt=""></p>
+<p><img src="http://q5onj2ilv.bkt.clouddn.com/blog/20200215/ryNDNT6ErHyW.png?imageslim" alt="修改端口"></p>
 <p>确认无误后，即可应用，在“容器”中就可以找到我们刚才创建的容器了，在浏览器输入我们的对应的IP和端口号xxx.xxx.xxx.xxx:3000即可访问。</p>
 <p>Enjoy！</p>
-<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200214152531808.png" alt="image-20200214152531808"></p>
+<p><img src="http://q5onj2ilv.bkt.clouddn.com/blog/20200215/XpwgaGBkh3LU.png?imageslim" alt="Demo"></p>
 
         </div>
 
