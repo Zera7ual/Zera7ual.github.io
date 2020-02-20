@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Zera7ul">
+
+
+    <meta name="subtitle" content="Life is like a box of chocolates.">
+
+
+
+
+<title>Nmap基础用法 | Zera7ul&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Zera7ul&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Zera7ul&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Nmap基础用法</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Zera7ul</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">二月 20, 2020&nbsp;&nbsp;17:53:41</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Code/">Code</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Nmap基础用法"><a href="#Nmap基础用法" class="headerlink" title="Nmap基础用法"></a>Nmap基础用法</h1><h3 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h3><p><a href="https://nmap.org/download.html$windows" target="_blank" rel="noopener">Nmap</a>(“Network Mapper”)是一款开源的网络发现和安全审计工具，它可以适用于Winodws、Linux、macOS等操作系统，扫描速度要比<a href="https://zh.wikipedia.org/wiki/Netcat" target="_blank" rel="noopener">nc</a>快。其基本功能主要有：</p>
+<ul>
+<li>主机发现</li>
+</ul>
+<p>用于发现目标主机是否处于活动状态。<br>Nmap 提供了多种检测机制，可以更有效地辨识主机。例如可用来列举目标网络中哪些主机已经开启，类似于Ping命令的功能。</p>
+<ul>
+<li>端口扫描</li>
+</ul>
+<p>用于扫描主机上的端口状态。<br>Nmap可以将端口识别为开放（Open）、关闭（Closed）、过滤（Filtered）、未过滤（Unfiltered）、开放或过滤（Open|Filtered）、关闭或过滤（Closed|Filtered）。默认情况下，Nmap会扫描1660个常用的端口<a href="https://nmap.org/man/zh/man-port-scanning-basics.html" target="_blank" rel="noopener">[1]</a>，可以覆盖大多数基本应用情况。</p>
+<ul>
+<li>版本侦测</li>
+</ul>
+<p>用于识别端口上运行的应用程序与程序版本。<br>Nmap当前可以识别数千种应用的签名（Signatures）,检测数百种应用协议。而对于不识别的应用，Nmap默认会将应用的指纹(Fingerprint)打印出来，如果用户确知该应用程序，那么用户可以将信息提交到社区，为社区做贡献。</p>
+<ul>
+<li>操作系统侦测</li>
+</ul>
+<p>用于识别目标主机的操作系统类型、版本编号及设备类型。<br>Nmap当前提供1500个操作系统或设备的指纹数据库<a href="https://nmap.org/man/zh/man-os-detection.html" target="_blank" rel="noopener">[2]</a>，可以识别通用PC系统、路由器、交换机等设备类型。</p>
+<ul>
+<li>防火墙/IDS规避和哄骗</li>
+</ul>
+<p>Nmap提供多种机制来规避防火墙、IDS的的屏蔽和检查，便于秘密地探查目标主机的状况。<br>基本的规避方式包括：分片、IP诱骗、IP伪装、MAC地址伪装。</p>
+<ul>
+<li>NSE脚本引擎</li>
+</ul>
+<p>NSE是Nmap最强大最灵活的特性之一，可以用于增强主机发现、端口扫描、版本侦测和操作系统侦测等功能，还可以用来扩展高级的功能如web扫描、漏洞发现和漏洞利用等。Nmap使用Lua语言来作为NSE脚本语言，当前的Nmap脚本库已经支持350多个脚本。</p>
+<h4 id="Nmap所识别的6种端口状态"><a href="#Nmap所识别的6种端口状态" class="headerlink" title="Nmap所识别的6种端口状态"></a>Nmap所识别的6种端口状态</h4><ul>
+<li><p>open(开放的)</p>
+<p>应用程序正在该端口接收TCP 连接或者UDP报文。发现这一点常常是端口扫描 的主要目标。安全意识强的人们知道每个开放的端口 都是攻击的入口。攻击者或者入侵测试者想要发现开放的端口。 而管理员则试图关闭它们或者用防火墙保护它们以免妨碍了合法用户。 非安全扫描可能对开放的端口也感兴趣，因为它们显示了网络上那些服务可供使用。</p>
+</li>
+<li><p>closed(关闭的)</p>
+<p>关闭的端口对于Nmap也是可访问的(它接受Nmap的探测报文并作出响应)， 但没有应用程序在其上监听。 它们可以显示该IP地址上(主机发现，或者ping扫描)的主机正在运行up 也对部分操作系统探测有所帮助。 因为关闭的关口是可访问的，也许过会儿值得再扫描一下，可能一些又开放了。 系统管理员可能会考虑用防火墙封锁这样的端口。 那样他们就会被显示为被过滤的状态，下面讨论。</p>
+</li>
+<li><p>filtered(被过滤的)</p>
+<p>由于包过滤阻止探测报文到达端口， Nmap无法确定该端口是否开放。过滤可能来自专业的防火墙设备，路由器规则 或者主机上的软件防火墙。这样的端口让攻击者感觉很挫折，因为它们几乎不提供 任何信息。有时候它们响应ICMP错误消息如类型3代码13 (无法到达目标: 通信被管理员禁止)，但更普遍的是过滤器只是丢弃探测帧， 不做任何响应。 这迫使Nmap重试若干次以访万一探测包是由于网络阻塞丢弃的。 这使得扫描速度明显变慢。</p>
+</li>
+<li><p>unfiltered(未被过滤的)</p>
+<p>未被过滤状态意味着端口可访问，但Nmap不能确定它是开放还是关闭。 只有用于映射防火墙规则集的ACK扫描才会把端口分类到这种状态。 用其它类型的扫描如窗口扫描，SYN扫描，或者FIN扫描来扫描未被过滤的端口可以帮助确定 端口是否开放。</p>
+</li>
+<li><p>open|filtered(开放或者被过滤的)</p>
+<p>当无法确定端口是开放还是被过滤的，Nmap就把该端口划分成 这种状态。开放的端口不响应就是一个例子。没有响应也可能意味着报文过滤器丢弃 了探测报文或者它引发的任何响应。因此Nmap无法确定该端口是开放的还是被过滤的。 UDP，IP协议， FIN，Null，和Xmas扫描可能把端口归入此类。</p>
+</li>
+<li><p>closed|filtered(关闭或者被过滤的)</p>
+<p>该状态用于Nmap不能确定端口是关闭的还是被过滤的。 它只可能出现在IPID Idle扫描中。</p>
+</li>
+</ul>
+<h3 id="Nmap常用命令和典型用法"><a href="#Nmap常用命令和典型用法" class="headerlink" title="Nmap常用命令和典型用法"></a>Nmap常用命令和典型用法</h3><ul>
+<li>Nmap 基本语法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap [ &lt;扫描类型&gt; ...] [ &lt;选项&gt; ] &#123; &lt;扫描目标说明&gt; &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>全面进攻性扫描（包括各种主机发现、端口扫描、版本扫描、OS扫描及默认脚本扫描）:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Ping扫描:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sn -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>快速端口扫描:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -F -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>版本扫描:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sV -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>操作系统扫描:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -O -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定端口扫描:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p 80,8080 &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定文件中的IP扫描:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -iL &lt;target_file&gt; 扫描指定文件中的IP</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>TCP/UDP/SYN扫描</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sT/sU/sS &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>协议探测</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sO &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>跳过主机发现，默认认为主机存活</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -Pn &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>扫描结果以XML/普通/三种主要格式输出到文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap &lt;target_ip&gt; -oX/oN/oA &lt;target_output_file&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="进阶使用：常用脚本"><a href="#进阶使用：常用脚本" class="headerlink" title="进阶使用：常用脚本"></a>进阶使用：常用脚本</h3><ul>
+<li>和ftp相关的一些漏洞检测脚本:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ftp-anon.nse	检查目标ftp是否允许匿名登录,光能登陆还不够,它还会自动检测目录是否可读写,如,批量ftp抓鸡</span><br><span class="line">$ nmap -p 21 --script ftp-anon.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ftp-brute.nse	ftp爆破脚本[只会尝试一些比较简单的弱口令,时间可能要稍微长一些(挂vpn以后这个爆破速度可能会更慢)]</span><br><span class="line">$ nmap -p 21 --script ftp-brute.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ftp-vuln-cve2010-4221.nse    ProFTPD 1.3.3c之前的netio.c文件中的pr_netio_telnet_gets函数中存在多个栈溢出</span><br><span class="line">$ nmap -p 21 --script ftp-vuln-cve2010-4221.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ftp-proftpd-backdoor.nse    ProFTPD 1.3.3c 被人插后门[proftpd-1.3.3c.tar.bz2],缺省只执行id命令,可自行到脚本中它换成能直接弹shell的命令</span><br><span class="line">$ nmap -p 21 --script ftp-vuln-cve2010-4221.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ftp-vsftpd-backdoor.nse    VSFTPD v2.3.4 跟Proftp同样的问题,被人插了后门</span><br><span class="line">$ nmap -p 21 --script ftp-vsftpd-backdoor.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>和ssh 相关的一些扫描脚本:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sshv1.nse     sshv1是可以中间人的</span><br><span class="line">$ nmap -p 22 --script sshv1.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>和smtp 相关的一些扫描脚本:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">smtp-brute.nse    简单爆破smtp</span><br><span class="line">$ nmap -p 25 --script smtp-brute.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">smtp-enum-users.nse 	 枚举目标smtp服务器的邮件用户名,前提是目标要存在此错误配置才行</span><br><span class="line">$ nmap -p 25 --script smtp-enum-users.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">smtp-vuln-cve2010-4344.nse    Exim 4.70之前版本中的string.c文件中的string_vformat函数中存在堆溢出</span><br><span class="line">$ nmap -p 25 --script smtp-vuln-cve2010-4344.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">smtp-vuln-cve2011-1720.nse     Postfix 2.5.13之前版本，2.6.10之前的2.6.x版本，2.7.4之前的2.7.x版本和2.8.3之前的2.8.x版本,存在溢出</span><br><span class="line">$ nmap -p 25 --script smtp-vuln-cve2011-1720.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">smtp-vuln-cve2011-1764.nse     Exim &quot;dkim_exim_verify_finish()&quot; 存在格式字符串漏洞,太老基本很难遇到了</span><br><span class="line">$ nmap -p 25 --script smtp-vuln-cve2011-1764.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>和pop3 相关的一些扫描脚本:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pop3-brute.nse    pop简单弱口令爆破</span><br><span class="line">$ nmap -p 110 --script pop3-brute.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>和imap 相关的一些扫描脚本:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">imap-brute.nse    imap简单弱口令爆破</span><br><span class="line">$ nmap -p 143,993 --script imap-brute.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>和dns 相关的一些漏洞扫描脚本:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dns-zone-transfer.nse	 检查目标ns服务器是否允许传送</span><br><span class="line">$ nmap -p 53 --script dns-zone-transfer.nse -v &lt;target_ip&gt;</span><br><span class="line">$ nmap -p 53 --script dns-zone-transfer.nse --script-args dns-zone-transfer.domain&#x3D;target.org -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hostmap-ip2hosts.nse     旁站查询,目测了一下脚本,用的ip2hosts的接口,不过该接口似乎早已停用,如果想继续用,可自行到脚本里把接口部分的代码改掉</span><br><span class="line">$ nmap -p80 --script hostmap-ip2hosts.nse &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>和各种数据库相关的扫描脚本:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">informix-brute.nse   informix爆破脚本</span><br><span class="line">$ nmap -p 9088 --script informix-brute.nse &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql-empty-password.nse   mysql 扫描root空密码</span><br><span class="line">$ nmap -p 3306 --script mysql-empty-password.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql-brute.nse    mysql root弱口令简单爆破</span><br><span class="line">$ nmap -p 3306 --script mysql-brute.nse -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql-dump-hashes.nse    导出mysql中所有用户的hash</span><br><span class="line">$ nmap -p 3306 --script mysql-dump-hashes --script-args&#x3D;&#39;username&#x3D;root,password&#x3D;root&#39; &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql-vuln-cve2012-2122.nse   Mysql身份认证漏洞[MariaDB and MySQL  5.1.61,5.2.11, 5.3.5, 5.5.22],利用条件有些苛刻 [需要目标的mysql是自己源码编译安装的,这样的成功率相对较高]</span><br><span class="line">$ nmap -p 3306 --script mysql-vuln-cve2012-2122.nse  -v &lt;target_ip&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -p 445 --script ms-sql-info.nse -v 203.124.11.0&#x2F;24      ms-sql-info.nse 扫描C段mssql</span><br><span class="line">$ nmap -p 1433 --script ms-sql-info.nse --script-args mssql.instance-port&#x3D;1433 -v 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ms-sql-empty-password.nse 	扫描mssql sa空密码</span><br><span class="line">$ nmap -p 1433 --script ms-sql-empty-password.nse -v 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ms-sql-brute.nse    sa弱口令爆破</span><br><span class="line">$ nmap -p 1433 --script ms-sql-brute.nse -v 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ms-sql-xp-cmdshell.nse   利用xp_cmdshell,远程执行系统命令</span><br><span class="line">$ nmap -p 1433 --script ms-sql-xp-cmdshell --script-args mssql.username&#x3D;sa,mssql.password&#x3D;sa,ms-sql-xp-cmdshell.cmd&#x3D;&quot;net user test test &#x2F;add&quot; 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ms-sql-dump-hashes.nse    导出mssql中所有的数据库用户及密码hash</span><br><span class="line">$ nmap -p 1433 --script ms-sql-dump-hashes -v 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pgsql-brute.nse   尝试爆破postgresql</span><br><span class="line">$ nmap -p 5432 --script pgsql-brute -v 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">oracle-brute-stealth.nse  尝试爆破oracle</span><br><span class="line">$ nmap --script oracle-brute-stealth -p 1521 --script-args oracle-brute-stealth.sid&#x3D;ORCL  -v 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">oracle-brute.nse</span><br><span class="line">$ nmap --script oracle-brute -p 1521 --script-args oracle-brute.sid&#x3D;ORCL -v 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mongodb-brute.nse   尝试爆破mongdb</span><br><span class="line">$ nmap -p 27017  --script mongodb-brute 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis-brute.nse   redis爆破</span><br><span class="line">$ nmap -p 6379 --script redis-brute.nse 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>和snmp相关的一些扫描脚本:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">snmp-brute.nse   爆破C段的snmp </span><br><span class="line">$ nmap -sU --script snmp-brute --script-args snmp-brute.communitiesdb&#x3D;user.txt 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>和telnet相关的一些扫描脚本:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">telnet-brute.nse   简单爆破telnet</span><br><span class="line">$ nmap -p 23 --script telnet-brute --script-args userdb&#x3D;myusers.lst,passdb&#x3D;mypwds.lst,telnet-brute.timeout&#x3D;8s -v 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>和ldap服务相关的一些利用脚本:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ldap-brute.nse   简单爆破ldap</span><br><span class="line">$ nmap -p 389 --script ldap-brute --script-args ldap.base&#x3D;&#39;&quot;cn&#x3D;users,dc&#x3D;cqure,dc&#x3D;net&quot;&#39; 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>和各类web中间件,web集成环境相关的一些利用脚本:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xmpp-brute.nse    xmpp爆破</span><br><span class="line">$ nmap -p 5222 --script xmpp-brute.nse  192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http-iis-short-name-brute.nse  	 短文件扫描</span><br><span class="line">$ nmap -p80 --script http-iis-short-name-brute.nse 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http-iis-webdav-vuln.nse  	 iis 5.0 &#x2F;6.0 webadv写</span><br><span class="line">$ nmap --script http-iis-webdav-vuln.nse -p80,8080 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http-shellshock.nse 	 bash远程执行</span><br><span class="line">$ nmap -sV -p- --script http-shellshock --script-args uri&#x3D;&#x2F;cgi-bin&#x2F;bin,cmd&#x3D;ls 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http-svn-info.nse   	探测目标svn</span><br><span class="line">$ nmap --script http-svn-info 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http-drupal-enum.nse   	 其实对于这类的开源程序,我们根本没必要用nmap,因为搞多了,差不多一眼就能看出来</span><br><span class="line">http-wordpress-brute.nse</span><br><span class="line">$ nmap -p80 -sV --script http-wordpress-brute --script-args &#39;userdb&#x3D;users.txt,passdb&#x3D;passwds.txt,http-wordpress-brute.hostname&#x3D;domain.com,http-wordpress-brute.threads&#x3D;3,brute.firstonly&#x3D;true&#39; 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http-backup-finder.nse   扫描目标网站备份</span><br><span class="line">$ nmap -p80 --script&#x3D;http-backup-finder 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http-vuln-cve2015-1635.nse   iis6.0远程代码执行</span><br><span class="line">$ nmap -sV --script http-vuln-cve* --script-args uri&#x3D;&#39;&#x2F;anotheruri&#x2F;&#39;  192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>跟vpn相关的一些利用脚本,暂时只看到一个pptp还好使:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pptp-version.nse   识别目标pptp版本</span><br><span class="line">$ nmap -p 1723 --script pptp-version.nse 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>smb漏洞检测脚本集::</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">smb-vuln-ms08-067.nse</span><br><span class="line">smb-vuln-ms10-054.nse</span><br><span class="line">smb-vuln-ms10-061.nse</span><br><span class="line">smb-vuln-ms17-010.nse  	 smb远程执行</span><br><span class="line">$ nmap -p445 --script smb-vuln-ms17-010.nse 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>检测内网嗅探,实际测试中,貌似并没什么卵用,难道是我实验有误 :(:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sniffer-detect.nse</span><br><span class="line">$ nmap -sn -Pn --script sniffer-detect.nse 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其它的一些辅助性脚本:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rsync-brute.nse 	爆破目标的rsync</span><br><span class="line">$ nmap -p 873 --script rsync-brute --script-args &#39;rsync-brute.module&#x3D;www&#39; 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rlogin-brute.nse 	爆破目标的rlogin</span><br><span class="line">$ nmap -p 513 --script rlogin-brute 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vnc-brute.nse  	 爆破目标的vnc</span><br><span class="line">$ nmap --script vnc-brute -p 5900 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pcanywhere-brute.nse 	爆破pcanywhere</span><br><span class="line">$ nmap -p 5631 --script&#x3D;pcanywhere-brute 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nessus-brute.nse 	爆破nessus,貌似现在已经不是1241端口了,实在是太老了,直接忽略吧</span><br><span class="line">$ nmap --script nessus-brute -p 1241 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nexpose-brute.nse	 爆破nexpose</span><br><span class="line">$ nmap --script nexpose-brute -p 3780 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shodan-api.nse  	配合shodan接口进行扫描,如果自己手里有0day,这个威力还是不可小觑的</span><br><span class="line"> $ nmap --script shodan-api --script-args &#39;shodan-api.target&#x3D;192.168.3.0&#x2F;24,shodan-api.apikey&#x3D;SHODANAPIKEY&#39;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>尝试利用nmap一句话进行目标C段常规漏洞扫描</li>
+</ul>
+<p>实际测试中,会非常的慢,可能跑一个脚本验证时间都要很长,尤其在你的vps带宽不是很足,网络又不怎么好的时候,速度就更慢了,所以还是建议先大致扫一眼目标服务,然后再单独针对性的扫,这样实际的成功率可能会高很多,毕竟,不是像masscan或者zamp这种基于无状态的扫描:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sT -Pn -v --script dns-zone-transfer.nse,ftp-anon.nse,ftp-proftpd-backdoor.nse,ftp-vsftpd-backdoor.nse,ftp-vuln-cve2010-4221.nse,http-backup-finder.nse,http-cisco-anyconnect.nse,http-iis-short-name-brute.nse,http-put.nse,http-php-version.nse,http-shellshock.nse,http-robots.txt.nse,http-svn-enum.nse,http-webdav-scan.nse,iis-buffer-overflow.nse,iax2-version.nse,memcached-info.nse,mongodb-info.nse,msrpc-enum.nse,ms-sql-info.nse,mysql-info.nse,nrpe-enum.nse,pptp-version.nse,redis-info.nse,rpcinfo.nse,samba-vuln-cve-2012-1182.nse,smb-vuln-ms08-067.nse,smb-vuln-ms17-010.nse,snmp-info.nse,sshv1.nse,xmpp-info.nse,tftp-enum.nse,teamspeak2-version.nse 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+
+<p>尝试利用nmap一句话进行目标C段弱口令爆破,还是上面的问题,验证一个漏洞都要那么久,更不要说跑完一个弱口令字典,nmap默认的弱口令字典大概是5000左右,也就是说一个用户名就要跑大概5000次,估计你vps带宽再小点儿的话,这个就没什么谱了,毕竟我们是在公网,不是在内网,所以,还是建议最好不要同时加载很多个弱口令爆破脚本,如果实在没办法必须爆破,可以多花点儿时间,去搜集目标有价值的用户名,以此尽可能提高自己的命中率:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmap -sT -v -Pn --script ftp-brute.nse,imap-brute.nse,smtp-brute.nse,pop3-brute.nse,mongodb-brute.nse,redis-brute.nse,ms-sql-brute.nse,rlogin-brute.nse,rsync-brute.nse,mysql-brute.nse,pgsql-brute.nse,oracle-sid-brute.nse,oracle-brute.nse,rtsp-url-brute.nse,snmp-brute.nse,svn-brute.nse,telnet-brute.nse,vnc-brute.nse,xmpp-brute.nse 192.168.3.0&#x2F;24</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Zera7ul</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://zera7ul.github.io/2020/02/20/Nmap%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/">https://zera7ul.github.io/2020/02/20/Nmap%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Don't be  <strong>EVIL</strong></span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Nmap/"># Nmap</a>
+                    
+                        <a href="/tags/Cyber-Security/"># Cyber Security</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/02/14/%E5%88%A9%E7%94%A8%E7%BE%A4%E6%99%96Docker%E5%A5%97%E4%BB%B6%E6%90%AD%E5%BB%BACodiMD%E5%9C%A8%E7%BA%BFMarkdown%E6%96%87%E6%A1%A3%E5%8D%8F%E4%BD%9C%E6%9C%8D%E5%8A%A1/">利用群晖Docker套件搭建CodiMD在线Markdown文档协作服务</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Zera7ul | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
