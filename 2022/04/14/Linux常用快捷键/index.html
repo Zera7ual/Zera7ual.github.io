@@ -14,7 +14,7 @@
 
 
 
-<title>K8S基础操作 | Zera7ul&#39;s blog</title>
+<title>Linux常用快捷键 | Zera7ul&#39;s blog</title>
 
 
 
@@ -175,7 +175,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">K8S基础操作</h1>
+            <h1 class="post-title">Linux常用快捷键</h1>
             
                 <div class="post-meta">
                     
@@ -184,69 +184,143 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">八月 5, 2021&nbsp;&nbsp;8:58:44</a>
+                        Date: <a href="#">四月 14, 2022&nbsp;&nbsp;12:38:01</a>
                         </span>
                     
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/Code/">Code</a>
+                            
+                        </span>
                     
                 </div>
             
         </header>
 
         <div class="post-content">
-            <h1 id="K8S基础操作"><a href="#K8S基础操作" class="headerlink" title="K8S基础操作"></a>K8S基础操作</h1><h5 id="K8S集群构建"><a href="#K8S集群构建" class="headerlink" title="K8S集群构建:"></a>K8S集群构建:</h5><ul>
-<li><p>K8S集群重置（每台机器）<code>kubeadm reset</code></p>
-</li>
-<li><p>关闭虚拟内存<code>swapoff -a</code></p>
-</li>
-<li><p>K8S集群初始化 <code>kubeadm init --apiserver-advertise-address=192.168.0.2 --kubernetes-version v1.16.4 --pod-network-cidr=10.244.0.0/16</code> # 参数为K8S主机API服务的IP，和K8S容器网络平面的cidr地址段</p>
-</li>
-<li><p>子节点加入K8S集群<code>kubeadm join ...</code> #从master复制</p>
-</li>
-<li><p>K8s主机配置K8S环境变量</p>
-<ul>
-<li><p><code>cp /etc/kubernetes/admin.conf $HOME/</code></p>
-</li>
-<li><p><code>chown $(id -u):$(id -g) $HOME/admin.conf</code> </p>
-</li>
-<li><p><code>export KUBECONFIG=$HOME/admin.conf</code></p>
-<ul>
-<li><p><code>rm -rf $HOME/.kube</code></p>
-</li>
-<li><p><code>mkdir -p $HOME/.kube</code></p>
-</li>
-<li><p><code>cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</code></p>
-</li>
-<li><p><code>chown $(id -u):$(id -g) $HOME/.kube/config</code></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>K8S查询集群节点状态<code>kubectl get nodes</code></p>
-</li>
-<li><p>K8s集群安装网络插件<code>kubectl apply -f /microservice/kube-flannel-12-20201005-164-ens33-final.yml --validate=false</code></p>
-</li>
-</ul>
-<h5 id="微服务发布"><a href="#微服务发布" class="headerlink" title="微服务发布"></a>微服务发布</h5><ul>
-<li><p>启动Docker私有仓库服务器 <code>docker run -d -p 5000:5000 registry:2.6</code></p>
-</li>
-<li><p>手工镜像构建 <code>docker build -t=&quot;master:5000/chinamobile-zj-site2-flightticket-flightretrive&quot;</code> </p>
-</li>
-<li><p>上传镜像到私有仓库服务器 <code>Docker push master:5000/chinamobile-zj-site2-flightticket-flightretrive</code></p>
-</li>
-<li><p>发布微服务到K8S容器<code>kubectl run flightretrivedeploy --image=master:5000/chinamobile-zj-site2-flightticket-flightretrive  --port=12101 --replicas=3</code></p>
-</li>
-<li><p>查询微服务容器启动状态 <code>kubectl get pods</code></p>
-</li>
-<li><p>创建微服务容器-K8S Service  <code>kubectl expose deployment flightretrivedeploy --name=flightretriveservice --port=12101 --target-port=12101 --type=NodePort</code></p>
-</li>
-<li><p>微服务K8s容器扩容 <code>kubectl  scale deploy flightretrivedeploy --replicas=20</code></p>
-</li>
-<li><p><code>kubectl describe svc flightretrive</code>  查看微服务（暴露的NodePort端口）</p>
-</li>
-<li><p><code>kubectl delete deployment flightretrivedeploy</code>   删除微服务容器</p>
-</li>
-</ul>
+            <p>[TOC]</p>
+<hr>
+<h4 id="Bash-快捷键操作：emacs-模式"><a href="#Bash-快捷键操作：emacs-模式" class="headerlink" title="Bash 快捷键操作：emacs 模式"></a>Bash 快捷键操作：emacs 模式</h4><blockquote>
+<p> 在 .bashrc 中加入 set -o vi 可开启 vim 模式</p>
+</blockquote>
+<h5 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h5><p>命令 | 描述 | 命令<br>— | :—: |<br>Ctrl+a | 到行首 移动光标 到行尾 | Ctrl+e<br>Ctrl+f | 前移  一个字符  后移 | Ctrl+b<br>Alt+f | 前移  一个单词  后移 | Alt+b<br>Ctrl+l | 清空屏幕 | clear<br>Ctrl+xx | 在行首和光标处移动</p>
+<h5 id="修改文本"><a href="#修改文本" class="headerlink" title="修改文本"></a>修改文本</h5><p>命令 | 描述 | 命令<br>— | :—: |<br>Ctrl+t | 字符 和光标前互换位置 单词 | Alt+t<br>Alt+l | 转小写 从光标处到字尾 转大写 | Alt+u<br>Ctrl+d | 光标处 删除字符 光标前| Ctrl+h<br>Alt+c | 改变光标处字母为大写(其余转小写)</p>
+<h5 id="剪切和粘贴文本"><a href="#剪切和粘贴文本" class="headerlink" title="剪切和粘贴文本"></a>剪切和粘贴文本</h5><p>命令 | 描述 | 命令<br>— | :—: |<br>Ctrl+k | 到行首 剪切光标处文本 到行尾 | Ctrl+u<br>Ctrl+w | 到词首 剪切光标处文本 到词尾 | Alt+d<br>Ctrl+y | 粘贴文本至光标后</p>
+<h4 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h4><h5 id="Yum-前端软件包管理器"><a href="#Yum-前端软件包管理器" class="headerlink" title="Yum 前端软件包管理器"></a>Yum 前端软件包管理器</h5><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>yum search search_string</td>
+<td>搜索软件包</td>
+</tr>
+<tr>
+<td>yum install package_name</td>
+<td>安装软件包</td>
+</tr>
+<tr>
+<td>yum update package_name</td>
+<td>更新软件包</td>
+</tr>
+<tr>
+<td>yum erase package_name</td>
+<td>卸载软件包</td>
+</tr>
+<tr>
+<td>yum info package_name</td>
+<td>查看软件信息</td>
+</tr>
+</tbody></table>
+<h5 id="rpm-本地软件包管理"><a href="#rpm-本地软件包管理" class="headerlink" title="rpm 本地软件包管理"></a>rpm 本地软件包管理</h5><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rpm -qa</td>
+<td>列出已安装的软件包</td>
+</tr>
+<tr>
+<td>rpm -i package_file</td>
+<td>本地安装软件包</td>
+</tr>
+<tr>
+<td>rpm -U package_file</td>
+<td>本地更新软件包</td>
+</tr>
+<tr>
+<td>rpm -e package_name</td>
+<td>卸载软件包</td>
+</tr>
+<tr>
+<td>rpm -q package_name</td>
+<td>查看软件是否安装</td>
+</tr>
+<tr>
+<td>rpm -qf file_name</td>
+<td>查询哪个软件创建</td>
+</tr>
+</tbody></table>
+<h4 id="历史命令"><a href="#历史命令" class="headerlink" title="历史命令"></a>历史命令</h4><p>命令 | 描述 | 命令<br>— | :—: |<br>Ctrl+p | 上个 移到历史命令 下个 | Ctrl+n<br>Alt+&lt; | 开头 移到历史列表 结尾 | Alt+&gt;<br>Ctrl+r | 逆向搜索历史命令 退出 | Ctrl+g<br>!! | 执行上一条命令<br>! number | 执行历史命令中第 n 行命令</p>
+<h4 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ps</td>
+<td>查看当前进程</td>
+<td>top</td>
+<td>显示任务</td>
+</tr>
+<tr>
+<td>jobs</td>
+<td>查看后台任务</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>bg</td>
+<td>后台执行任务</td>
+<td>fg</td>
+<td>前台执行任务</td>
+</tr>
+<tr>
+<td>killall</td>
+<td>结束所有同名进程</td>
+<td>kill</td>
+<td>结束进程</td>
+</tr>
+<tr>
+<td>shutdown</td>
+<td>关机或重启系统</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pstree</td>
+<td>树形结构进程列表</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>vmstat</td>
+<td>系统资源使用快照</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 
         </div>
 
@@ -261,7 +335,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="https://zera7ul.github.io/2021/08/05/K8S%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/">https://zera7ul.github.io/2021/08/05/K8S%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/</a></span>
+                        <span><a href="https://zera7ul.github.io/2022/04/14/Linux%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/">https://zera7ul.github.io/2022/04/14/Linux%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</a></span>
                     </p>
                 
                 
@@ -284,6 +358,14 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        <a href="/tags/Emacs/"># Emacs</a>
+                    
+                        <a href="/tags/VIM/"># VIM</a>
+                    
+                        
                 </span>
             </div>
             <div>
@@ -294,10 +376,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2022/04/14/Linux%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/">Linux常用快捷键</a>
             
-            
-            <a class="next" rel="next" href="/2020/02/20/Nmap%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/">Nmap基础用法</a>
+            <a class="next" rel="next" href="/2021/08/05/K8S%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/">K8S基础操作</a>
             
         </section>
 
